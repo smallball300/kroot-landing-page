@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kroot | AI-Powered Medical Flashcards</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .medical-gradient {
+            background: linear-gradient(135deg, #0d9488 0%, #0f766e 100%);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 font-sans">
+
+    <!-- Nav -->
+    <nav class="p-6 max-w-7xl mx-auto flex justify-between items-center">
+        <img src="assets/logo.jpg" alt="Kroot Logo" class="h-10 rounded-md shadow-sm">
+        <a href="#waitlist" class="bg-teal-600 text-white px-5 py-2 rounded-full font-semibold hover:bg-teal-700 transition">Join Waitlist</a>
+    </nav>
+
+    <!-- Hero -->
+    <header class="max-w-7xl mx-auto px-6 py-20 text-center">
+        <h1 class="text-5xl md:text-7xl font-bold tracking-tight text-slate-900 mb-6">
+            Master Medicine with <span class="text-teal-600">AI Intelligence.</span>
+        </h1>
+        <p class="text-xl text-slate-600 max-w-2xl mx-auto mb-10">
+            Kroot transforms your study material into high-yield flashcards instantly. Designed for medical students who value execution over busywork.
+        </p>
+        <div class="flex flex-col md:flex-row gap-4 justify-center">
+            <a href="#waitlist" class="bg-teal-600 text-white px-8 py-4 rounded-xl text-lg font-bold hover:bg-teal-700 shadow-lg shadow-teal-200 transition">Get Early Access</a>
+            <a href="#features" class="bg-white text-teal-700 border-2 border-teal-100 px-8 py-4 rounded-xl text-lg font-bold hover:border-teal-200 transition">Learn More</a>
+        </div>
+    </header>
+
+    <!-- Features -->
+    <section id="features" class="bg-white py-24">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-3 gap-12">
+                <div class="p-8 rounded-2xl bg-slate-50 border border-slate-100">
+                    <div class="w-12 h-12 bg-teal-100 text-teal-600 rounded-lg flex items-center justify-center mb-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Instant Generation</h3>
+                    <p class="text-slate-600">Upload your lectures or notes. Kroot's AI handles the extraction and formatting so you can start studying in seconds.</p>
+                </div>
+                <div class="p-8 rounded-2xl bg-slate-50 border border-slate-100">
+                    <div class="w-12 h-12 bg-teal-100 text-teal-600 rounded-lg flex items-center justify-center mb-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">High-Yield Focus</h3>
+                    <p class="text-slate-600">Our algorithms prioritize "high-yield" content mapped to medical board standards, ensuring you learn what actually matters.</p>
+                </div>
+                <div class="p-8 rounded-2xl bg-slate-50 border border-slate-100">
+                    <div class="w-12 h-12 bg-teal-100 text-teal-600 rounded-lg flex items-center justify-center mb-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Smart Repetition</h3>
+                    <p class="text-slate-600">Integrated Spaced Repetition (SRS) that adapts to your performance, maximizing retention with minimum effort.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Waitlist -->
+    <section id="waitlist" class="medical-gradient py-24 text-white">
+        <div class="max-w-3xl mx-auto px-6 text-center">
+            <h2 class="text-4xl font-bold mb-6">Ready to skip the busywork?</h2>
+            <p class="text-teal-50 text-xl mb-10">We're currently in stealth. Join the waitlist for early access to the pilot program.</p>
+            
+            <form class="flex flex-col md:flex-row gap-4">
+                <input type="email" placeholder="Enter your .edu email" class="flex-1 px-6 py-4 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-teal-300" required>
+                <button type="submit" class="bg-slate-900 text-white px-8 py-4 rounded-xl font-bold hover:bg-black transition">Join Waitlist</button>
+            </form>
+            <p class="mt-4 text-sm text-teal-100 opacity-80">Reserved for medical students and professionals.</p>
+        </div>
+    </section>
+
+    <footer class="py-12 text-center text-slate-400 text-sm">
+        &copy; 2026 Kroot. All rights reserved.
+    </footer>
+
+</body>
+</html>
