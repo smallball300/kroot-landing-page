@@ -3,82 +3,584 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kroot | AI-Powered Medical Flashcards</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="description" content="Kroot is a medical study engine that helps students create high-yield flashcard decks faster and review more effectively with a smart, personalized workflow.">
+    <meta name="robots" content="index,follow">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Kroot | Medical Study Engine">
+    <meta property="og:description" content="Kroot is a medical study engine that helps students create high-yield flashcard decks faster and review more effectively with a smart, personalized workflow.">
+    <meta property="og:url" content="https://krootapp.com/">
+    <meta property="og:image" content="https://krootapp.com/assets/logo.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Kroot | Medical Study Engine">
+    <meta name="twitter:description" content="Kroot is a medical study engine that helps students create high-yield flashcard decks faster and review more effectively with a smart, personalized workflow.">
+    <meta name="twitter:image" content="https://krootapp.com/assets/logo.jpg">
+    <link rel="canonical" href="https://krootapp.com/">
+    <title>Kroot | Medical Study Engine</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Space+Grotesk:wght@400;500;700&family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
     <style>
-        .medical-gradient {
-            background: linear-gradient(135deg, #0d9488 0%, #0f766e 100%);
+        :root {
+            --bg: #edf6f8;
+            --ink: #10222a;
+            --muted: #51636b;
+            --teal-700: #05686d;
+            --teal-600: #0d7f85;
+            --teal-400: #31b0b1;
+            --white: #ffffff;
+            --card: #f7fbfc;
+            --line: #c2dbe0;
+            --radius: 18px;
+            --shadow: 0 12px 40px rgba(6, 59, 68, 0.14);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            color: var(--ink);
+            background:
+                radial-gradient(circle at 12% 18%, rgba(59, 185, 191, 0.18), transparent 34%),
+                radial-gradient(circle at 88% 10%, rgba(12, 121, 130, 0.2), transparent 32%),
+                linear-gradient(160deg, #f3fbfc 0%, var(--bg) 58%, #e7f1f3 100%);
+            font-family: "Manrope", sans-serif;
+            line-height: 1.5;
+        }
+
+        .shell {
+            width: min(1120px, 92vw);
+            margin: 0 auto;
+        }
+
+        .nav {
+            padding: 24px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav img {
+            height: 44px;
+            border-radius: 10px;
+            box-shadow: 0 8px 22px rgba(3, 66, 67, 0.16);
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0,0,0,0);
+            border: 0;
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .button {
+            text-decoration: none;
+            border: 0;
+            border-radius: 999px;
+            cursor: pointer;
+            padding: 12px 20px;
+            font-weight: 700;
+            font-family: "Space Grotesk", sans-serif;
+            transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+        }
+
+        .button-primary {
+            background: linear-gradient(135deg, var(--teal-600), var(--teal-700));
+            color: var(--white);
+            box-shadow: 0 10px 22px rgba(5, 104, 109, 0.34);
+        }
+
+        .button-ghost {
+            color: var(--teal-700);
+            background-color: rgba(255, 255, 255, 0.7);
+            border: 1px solid var(--line);
+        }
+
+        .hero {
+            padding: 32px 0 48px;
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 38px;
+            align-items: center;
+        }
+
+        .eyebrow {
+            margin: 0 0 14px;
+            font: 700 0.9rem/1 "Space Grotesk", sans-serif;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--teal-700);
+        }
+
+        h1, h2, h3 {
+            font-family: "Space Grotesk", sans-serif;
+            letter-spacing: -0.02em;
+            margin: 0;
+        }
+
+        h1 {
+            font-size: clamp(2.1rem, 6vw, 4.4rem);
+            line-height: 1.03;
+        }
+
+        .hero p {
+            margin: 16px 0 26px;
+            font-size: clamp(1rem, 2.4vw, 1.2rem);
+            color: var(--muted);
+            max-width: 64ch;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .hero-panel {
+            background: linear-gradient(160deg, rgba(255, 255, 255, 0.94), rgba(236, 249, 251, 0.94));
+            border: 1px solid rgba(130, 186, 191, 0.3);
+            box-shadow: var(--shadow);
+            border-radius: var(--radius);
+            padding: 24px;
+            animation: float-in 560ms ease-out forwards;
+            opacity: 0;
+            transform: translateY(14px);
+        }
+
+        .hero-panel h3 {
+            font-size: 1.15rem;
+            margin-bottom: 10px;
+        }
+
+        .hero-panel ul {
+            margin: 0;
+            padding-left: 18px;
+            color: var(--muted);
+        }
+
+        .hero-panel li + li {
+            margin-top: 8px;
+        }
+
+        .features {
+            padding: 34px 0 80px;
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .feature {
+            background: var(--card);
+            border-radius: var(--radius);
+            padding: 24px;
+            border: 1px solid rgba(160, 199, 204, 0.6);
+            box-shadow: 0 8px 24px rgba(17, 60, 69, 0.08);
+            animation: float-in 660ms ease-out forwards;
+            opacity: 0;
+            transform: translateY(14px);
+        }
+
+        .feature:nth-child(2) {
+            animation-delay: 110ms;
+        }
+
+        .feature:nth-child(3) {
+            animation-delay: 220ms;
+        }
+
+        .feature h3 {
+            margin-bottom: 9px;
+            font-size: 1.2rem;
+        }
+
+        .feature p {
+            margin: 0;
+            color: var(--muted);
+        }
+
+        .waitlist {
+            background: linear-gradient(130deg, #0b6266 0%, #04474f 100%);
+            color: var(--white);
+            border-radius: 26px;
+            padding: clamp(20px, 4vw, 34px);
+            margin-bottom: 34px;
+            box-shadow: 0 16px 44px rgba(4, 70, 79, 0.45);
+        }
+
+        .waitlist h2 {
+            font-size: clamp(1.7rem, 4vw, 2.7rem);
+            margin-bottom: 8px;
+        }
+
+        .waitlist p {
+            margin: 0 0 20px;
+            color: #d8eff1;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .field.full {
+            grid-column: 1 / -1;
+        }
+
+        .field label {
+            font: 700 0.9rem/1.2 "Space Grotesk", sans-serif;
+        }
+
+        .field input,
+        .field select,
+        .field textarea {
+            border: 1px solid #6da1a9;
+            background: rgba(255, 255, 255, 0.96);
+            color: #0f2a31;
+            border-radius: 12px;
+            padding: 12px;
+            font: 500 0.97rem/1.3 "Manrope", sans-serif;
+        }
+
+        .field textarea {
+            min-height: 94px;
+            resize: vertical;
+        }
+
+        .fine-print {
+            margin-top: 12px;
+            font-size: 0.84rem;
+            color: #c4e5e8;
+        }
+
+        html[dir="rtl"] body {
+            font-family: "Cairo", "Manrope", sans-serif;
+        }
+
+        html[dir="rtl"] .eyebrow {
+            letter-spacing: 0;
+            text-transform: none;
+        }
+
+        html[dir="rtl"] .hero-panel ul {
+            padding-right: 18px;
+            padding-left: 0;
+        }
+
+        html[dir="rtl"] .field input,
+        html[dir="rtl"] .field select,
+        html[dir="rtl"] .field textarea {
+            text-align: right;
+        }
+
+        footer {
+            text-align: center;
+            color: #6b858d;
+            font-size: 0.88rem;
+            padding: 10px 0 30px;
+        }
+
+        @keyframes float-in {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 950px) {
+            .hero {
+                grid-template-columns: 1fr;
+                padding-top: 10px;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-900 font-sans">
+<body>
+    <div class="shell">
+        <nav class="nav">
+            <img src="assets/logo.jpg" alt="Kroot Logo" loading="lazy">
+            <div class="nav-actions">
+                <a id="nav-join" class="button button-primary" href="#waitlist" data-i18n="navJoin" aria-label="Join the Kroot waitlist">Join Waitlist</a>
+                <button id="lang-toggle" class="button button-ghost" type="button" aria-label="Toggle language">العربية</button>
+            </div>
+        </nav>
 
-    <!-- Nav -->
-    <nav class="p-6 max-w-7xl mx-auto flex justify-between items-center">
-        <img src="assets/logo.jpg" alt="Kroot Logo" class="h-10 rounded-md shadow-sm">
-        <a href="#waitlist" class="bg-teal-600 text-white px-5 py-2 rounded-full font-semibold hover:bg-teal-700 transition">Join Waitlist</a>
-    </nav>
-
-    <!-- Hero -->
-    <header class="max-w-7xl mx-auto px-6 py-20 text-center">
-        <h1 class="text-5xl md:text-7xl font-bold tracking-tight text-slate-900 mb-6">
-            Master Medicine with <span class="text-teal-600">AI Intelligence.</span>
-        </h1>
-        <p class="text-xl text-slate-600 max-w-2xl mx-auto mb-10">
-            Kroot transforms your study material into high-yield flashcards instantly. Designed for medical students who value execution over busywork.
-        </p>
-        <div class="flex flex-col md:flex-row gap-4 justify-center">
-            <a href="#waitlist" class="bg-teal-600 text-white px-8 py-4 rounded-xl text-lg font-bold hover:bg-teal-700 shadow-lg shadow-teal-200 transition">Get Early Access</a>
-            <a href="#features" class="bg-white text-teal-700 border-2 border-teal-100 px-8 py-4 rounded-xl text-lg font-bold hover:border-teal-200 transition">Learn More</a>
-        </div>
-    </header>
-
-    <!-- Features -->
-    <section id="features" class="bg-white py-24">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="grid md:grid-cols-3 gap-12">
-                <div class="p-8 rounded-2xl bg-slate-50 border border-slate-100">
-                    <div class="w-12 h-12 bg-teal-100 text-teal-600 rounded-lg flex items-center justify-center mb-6">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3">Instant Generation</h3>
-                    <p class="text-slate-600">Upload your lectures or notes. Kroot's AI handles the extraction and formatting so you can start studying in seconds.</p>
-                </div>
-                <div class="p-8 rounded-2xl bg-slate-50 border border-slate-100">
-                    <div class="w-12 h-12 bg-teal-100 text-teal-600 rounded-lg flex items-center justify-center mb-6">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3">High-Yield Focus</h3>
-                    <p class="text-slate-600">Our algorithms prioritize "high-yield" content mapped to medical board standards, ensuring you learn what actually matters.</p>
-                </div>
-                <div class="p-8 rounded-2xl bg-slate-50 border border-slate-100">
-                    <div class="w-12 h-12 bg-teal-100 text-teal-600 rounded-lg flex items-center justify-center mb-6">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3">Smart Repetition</h3>
-                    <p class="text-slate-600">Integrated Spaced Repetition (SRS) that adapts to your performance, maximizing retention with minimum effort.</p>
+        <header class="hero">
+            <div>
+                <p class="eyebrow" data-i18n="eyebrow">For Medical Students</p>
+                <h1 data-i18n-html="heroTitle">Build better flashcard decks.<br>Make review feel less like a grind.</h1>
+                <p data-i18n="heroDesc">Kroot helps medical students stop wasting hours curating decks and spend that time mastering questions that actually matter.</p>
+                <div class="hero-actions">
+                    <a class="button button-primary" href="#waitlist" data-i18n="heroPrimaryCta">Get Early Access</a>
+                    <a class="button button-ghost" href="#features" data-i18n="heroSecondaryCta">See Why It Wins</a>
                 </div>
             </div>
-        </div>
-    </section>
+            <aside class="hero-panel" aria-label="Kroot value summary" data-i18n-aria-label="panelAria">
+                <h3 data-i18n="panelTitle">Why students stick with Kroot</h3>
+                <ul>
+                    <li data-i18n="panelPoint1">Create complete decks from your notes and lectures quickly.</li>
+                    <li data-i18n="panelPoint2">Keep cards high-yield and clinically relevant.</li>
+                    <li data-i18n="panelPoint3">Review modes are designed to feel engaging, not repetitive.</li>
+                </ul>
+            </aside>
+        </header>
 
-    <!-- Waitlist -->
-    <section id="waitlist" class="medical-gradient py-24 text-white">
-        <div class="max-w-3xl mx-auto px-6 text-center">
-            <h2 class="text-4xl font-bold mb-6">Ready to skip the busywork?</h2>
-            <p class="text-teal-50 text-xl mb-10">We're currently in stealth. Join the waitlist for early access to the pilot program.</p>
-            
-            <form class="flex flex-col md:flex-row gap-4">
-                <input type="email" placeholder="Enter your .edu email" class="flex-1 px-6 py-4 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-teal-300" required>
-                <button type="submit" class="bg-slate-900 text-white px-8 py-4 rounded-xl font-bold hover:bg-black transition">Join Waitlist</button>
+        <section id="features" class="features">
+            <article class="feature">
+                <h3 data-i18n="feature1Title">Deck Creation That Flows</h3>
+                <p data-i18n="feature1Desc">Build new decks fast from class material without spending hours formatting prompts and answers.</p>
+            </article>
+            <article class="feature">
+                <h3 data-i18n="feature2Title">High-Yield by Default</h3>
+                <p data-i18n="feature2Desc">Kroot prioritizes diagnoses, mechanisms, and management decisions that matter on exams and in rotations.</p>
+            </article>
+            <article class="feature">
+                <h3 data-i18n="feature3Title">Review That Feels Better</h3>
+                <p data-i18n="feature3Desc">A smarter review loop keeps sessions moving and rewarding, so you actually want to come back tomorrow.</p>
+            </article>
+        </section>
+
+        <section id="waitlist" class="waitlist">
+            <h2 data-i18n="waitlistTitle">Join the pilot waitlist</h2>
+            <p data-i18n="waitlistDesc">Tell us where you are in training so we can tailor onboarding and initial deck templates.</p>
+
+            <form id="waitlist-form" action="https://formsubmit.co/admin@krootapp.com" method="POST">
+                <input type="hidden" name="_subject" value="New Kroot Waitlist Submission">
+                <input type="hidden" name="_captcha" value="false">
+
+                <div class="form-grid">
+                    <div class="field">
+                        <label for="full-name" data-i18n="fullNameLabel">Full Name</label>
+                        <input id="full-name" name="full_name" type="text" autocomplete="name" required>
+                    </div>
+
+                    <div class="field">
+                        <label for="email" data-i18n="emailLabel">Email</label>
+                        <input id="email" name="email" type="email" autocomplete="email" placeholder="name@school.edu" data-i18n-placeholder="emailPlaceholder" required>
+                    </div>
+
+                    <div class="field">
+                        <label for="year" data-i18n="yearLabel">Current Year</label>
+                        <select id="year" name="current_year" required>
+                            <option value="" selected disabled data-i18n="yearPrompt">Select your training year</option>
+                            <option value="Pre-med" data-i18n="yearPremed">Pre-med</option>
+                            <option value="MS1">MS1</option>
+                            <option value="MS2">MS2</option>
+                            <option value="MS3">MS3</option>
+                            <option value="MS4">MS4</option>
+                            <option value="Resident" data-i18n="yearResident">Resident</option>
+                            <option value="Other" data-i18n="yearOther">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label for="school" data-i18n="schoolLabel">School</label>
+                        <input id="school" name="school" type="text" placeholder="University / Program name" data-i18n-placeholder="schoolPlaceholder" required>
+                    </div>
+
+                    <div class="field full">
+                        <label for="subject" data-i18n="subjectLabel">Main Subject You Want Kroot For</label>
+                        <select id="subject" name="subject_interest" required>
+                            <option value="" selected disabled data-i18n="subjectPrompt">Choose one</option>
+                            <option value="Anatomy" data-i18n="subjectAnatomy">Anatomy</option>
+                            <option value="Physiology" data-i18n="subjectPhysiology">Physiology</option>
+                            <option value="Pathology" data-i18n="subjectPathology">Pathology</option>
+                            <option value="Pharmacology" data-i18n="subjectPharmacology">Pharmacology</option>
+                            <option value="Microbiology" data-i18n="subjectMicrobiology">Microbiology</option>
+                            <option value="Internal Medicine" data-i18n="subjectInternalMedicine">Internal Medicine</option>
+                            <option value="Surgery" data-i18n="subjectSurgery">Surgery</option>
+                            <option value="Mixed Boards Prep" data-i18n="subjectMixedBoards">Mixed Boards Prep</option>
+                        </select>
+                    </div>
+
+                    <div class="field full">
+                        <label for="notes" data-i18n="notesLabel">Anything else we should know?</label>
+                        <textarea id="notes" name="notes" placeholder="Optional: current tools, pain points, or exams coming up." data-i18n-placeholder="notesPlaceholder"></textarea>
+                    </div>
+                </div>
+
+                <button class="button button-primary" type="submit" style="margin-top: 14px;" data-i18n="submitButton">Request Early Access</button>
             </form>
-            <p class="mt-4 text-sm text-teal-100 opacity-80">Reserved for medical students and professionals.</p>
-        </div>
-    </section>
+        </section>
 
-    <footer class="py-12 text-center text-slate-400 text-sm">
-        &copy; 2026 Kroot. All rights reserved.
-    </footer>
+        <footer data-i18n="footerText">&copy; 2026 Kroot. Built for students who study with intent.</footer>
+    </div>
+    <script>
+        const langToggle = document.getElementById("lang-toggle");
 
+        const translations = {
+            en: {
+                pageTitle: "Kroot | Medical Study Engine",
+                navJoin: "Join Waitlist",
+                langToggle: "العربية",
+                eyebrow: "For Medical Students",
+                heroTitle: "Build better flashcard decks.<br>Make review feel less like a grind.",
+                heroDesc: "Kroot helps medical students stop wasting hours curating decks and spend that time mastering questions that actually matter.",
+                heroPrimaryCta: "Get Early Access",
+                heroSecondaryCta: "See Why It Wins",
+                panelAria: "Kroot value summary",
+                panelTitle: "Why students stick with Kroot",
+                panelPoint1: "Create complete decks from your notes and lectures quickly.",
+                panelPoint2: "Keep cards high-yield and clinically relevant.",
+                panelPoint3: "Review modes are designed to feel engaging, not repetitive.",
+                feature1Title: "Deck Creation That Flows",
+                feature1Desc: "Build new decks fast from class material without spending hours formatting prompts and answers.",
+                feature2Title: "High-Yield by Default",
+                feature2Desc: "Kroot prioritizes diagnoses, mechanisms, and management decisions that matter on exams and in rotations.",
+                feature3Title: "Review That Feels Better",
+                feature3Desc: "A smarter review loop keeps sessions moving and rewarding, so you actually want to come back tomorrow.",
+                waitlistTitle: "Join the pilot waitlist",
+                waitlistDesc: "Tell us where you are in training so we can tailor onboarding and initial deck templates.",
+                fullNameLabel: "Full Name",
+                emailLabel: "Email",
+                emailPlaceholder: "name@school.edu",
+                yearLabel: "Current Year",
+                yearPrompt: "Select your training year",
+                yearPremed: "Pre-med",
+                yearResident: "Resident",
+                yearOther: "Other",
+                schoolLabel: "School",
+                schoolPlaceholder: "University / Program name",
+                subjectLabel: "Main Subject You Want Kroot For",
+                subjectPrompt: "Choose one",
+                subjectAnatomy: "Anatomy",
+                subjectPhysiology: "Physiology",
+                subjectPathology: "Pathology",
+                subjectPharmacology: "Pharmacology",
+                subjectMicrobiology: "Microbiology",
+                subjectInternalMedicine: "Internal Medicine",
+                subjectSurgery: "Surgery",
+                subjectMixedBoards: "Mixed Boards Prep",
+                notesLabel: "Anything else we should know?",
+                notesPlaceholder: "Optional: current tools, pain points, or exams coming up.",
+                submitButton: "Request Early Access",
+                footerText: "\u00A9 2026 Kroot. Built for students who study with intent."
+            },
+            ar: {
+                pageTitle: "Kroot | محرك دراسة الطب",
+                navJoin: "انضم إلى قائمة الانتظار",
+                langToggle: "English",
+                eyebrow: "لطلاب الطب",
+                heroTitle: "ابنِ بطاقات تعليمية أفضل.<br>واجعل المراجعة أقل إرهاقًا.",
+                heroDesc: "يساعد Kroot طلاب الطب على التوقف عن إضاعة الساعات في تنسيق البطاقات والتركيز على الأسئلة التي تصنع فرقًا فعليًا.",
+                heroPrimaryCta: "احصل على وصول مبكر",
+                heroSecondaryCta: "اكتشف لماذا يتفوق",
+                panelAria: "ملخص قيمة Kroot",
+                panelTitle: "لماذا يستمر الطلاب مع Kroot",
+                panelPoint1: "أنشئ مجموعات بطاقات كاملة من ملاحظاتك ومحاضراتك بسرعة.",
+                panelPoint2: "حافظ على البطاقات عالية العائد ومرتبطة سريريًا.",
+                panelPoint3: "أنماط المراجعة مصممة لتكون ممتعة وليست مكررة.",
+                feature1Title: "إنشاء بطاقات بسلاسة",
+                feature1Desc: "ابنِ مجموعات جديدة بسرعة من موادك الدراسية دون ساعات من تنسيق الأسئلة والإجابات.",
+                feature2Title: "تركيز عالي العائد تلقائيًا",
+                feature2Desc: "يعطي Kroot الأولوية للتشخيصات والآليات وخيارات العلاج المهمة في الاختبارات والتدريب السريري.",
+                feature3Title: "مراجعة أفضل شعورًا",
+                feature3Desc: "حلقة مراجعة أذكى تُبقي الجلسات سلسة ومجزية لتعود إليها غدًا بكل رغبة.",
+                waitlistTitle: "انضم إلى قائمة الانتظار التجريبية",
+                waitlistDesc: "أخبرنا في أي مرحلة تدريب أنت لنخصص لك تجربة الانضمام والقوالب الأولى للبطاقات.",
+                fullNameLabel: "الاسم الكامل",
+                emailLabel: "البريد الإلكتروني",
+                emailPlaceholder: "name@school.edu",
+                yearLabel: "السنة الحالية",
+                yearPrompt: "اختر سنة التدريب",
+                yearPremed: "ما قبل الطب",
+                yearResident: "طبيب مقيم",
+                yearOther: "أخرى",
+                schoolLabel: "الجامعة",
+                schoolPlaceholder: "اسم الجامعة / البرنامج",
+                subjectLabel: "المادة الأساسية التي تريد Kroot لها",
+                subjectPrompt: "اختر واحدة",
+                subjectAnatomy: "التشريح",
+                subjectPhysiology: "علم وظائف الأعضاء",
+                subjectPathology: "علم الأمراض",
+                subjectPharmacology: "علم الأدوية",
+                subjectMicrobiology: "الأحياء الدقيقة",
+                subjectInternalMedicine: "الطب الباطني",
+                subjectSurgery: "الجراحة",
+                subjectMixedBoards: "تحضير شامل للبورد",
+                notesLabel: "هل هناك أي شيء آخر يجب أن نعرفه؟",
+                notesPlaceholder: "اختياري: الأدوات الحالية أو التحديات أو الاختبارات القادمة.",
+                submitButton: "اطلب الوصول المبكر",
+                footerText: "\u00A9 2026 Kroot. بُني للطلاب الذين يدرسون بتركيز."
+            }
+        };
+
+        function setLanguage(lang) {
+            const copy = translations[lang];
+            document.documentElement.lang = lang;
+            document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+            document.title = copy.pageTitle;
+
+            document.querySelectorAll("[data-i18n]").forEach((node) => {
+                const key = node.getAttribute("data-i18n");
+                if (copy[key]) {
+                    node.textContent = copy[key];
+                }
+            });
+
+            document.querySelectorAll("[data-i18n-html]").forEach((node) => {
+                const key = node.getAttribute("data-i18n-html");
+                if (copy[key]) {
+                    node.innerHTML = copy[key];
+                }
+            });
+
+            document.querySelectorAll("[data-i18n-placeholder]").forEach((node) => {
+                const key = node.getAttribute("data-i18n-placeholder");
+                if (copy[key]) {
+                    node.setAttribute("placeholder", copy[key]);
+                }
+            });
+
+            document.querySelectorAll("[data-i18n-aria-label]").forEach((node) => {
+                const key = node.getAttribute("data-i18n-aria-label");
+                if (copy[key]) {
+                    node.setAttribute("aria-label", copy[key]);
+                }
+            });
+
+            langToggle.textContent = copy.langToggle;
+            localStorage.setItem("krootLanguage", lang);
+        }
+
+        const savedLanguage = localStorage.getItem("krootLanguage");
+        setLanguage(savedLanguage === "ar" ? "ar" : "en");
+
+        langToggle.addEventListener("click", function () {
+            const nextLang = document.documentElement.lang === "ar" ? "en" : "ar";
+            setLanguage(nextLang);
+        });
+    </script>
 </body>
 </html>
