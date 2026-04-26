@@ -213,67 +213,6 @@
             color: var(--muted);
         }
 
-        .waitlist {
-            background: linear-gradient(130deg, #0b6266 0%, #04474f 100%);
-            color: var(--white);
-            border-radius: 26px;
-            padding: clamp(20px, 4vw, 34px);
-            margin-bottom: 34px;
-            box-shadow: 0 16px 44px rgba(4, 70, 79, 0.45);
-        }
-
-        .waitlist h2 {
-            font-size: clamp(1.7rem, 4vw, 2.7rem);
-            margin-bottom: 8px;
-        }
-
-        .waitlist p {
-            margin: 0 0 20px;
-            color: #d8eff1;
-        }
-
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 14px;
-        }
-
-        .field {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-
-        .field.full {
-            grid-column: 1 / -1;
-        }
-
-        .field label {
-            font: 700 0.9rem/1.2 "Space Grotesk", sans-serif;
-        }
-
-        .field input,
-        .field select,
-        .field textarea {
-            border: 1px solid #6da1a9;
-            background: rgba(255, 255, 255, 0.96);
-            color: #0f2a31;
-            border-radius: 12px;
-            padding: 12px;
-            font: 500 0.97rem/1.3 "Manrope", sans-serif;
-        }
-
-        .field textarea {
-            min-height: 94px;
-            resize: vertical;
-        }
-
-        .fine-print {
-            margin-top: 12px;
-            font-size: 0.84rem;
-            color: #c4e5e8;
-        }
-
         html[dir="rtl"] body {
             font-family: "Cairo", "Manrope", sans-serif;
         }
@@ -286,12 +225,6 @@
         html[dir="rtl"] .hero-panel ul {
             padding-right: 18px;
             padding-left: 0;
-        }
-
-        html[dir="rtl"] .field input,
-        html[dir="rtl"] .field select,
-        html[dir="rtl"] .field textarea {
-            text-align: right;
         }
 
         footer {
@@ -319,11 +252,6 @@
             }
         }
 
-        @media (max-width: 700px) {
-            .form-grid {
-                grid-template-columns: 1fr;
-            }
-        }
     </style>
 </head>
 <body>
@@ -331,7 +259,7 @@
         <nav class="nav">
             <img src="assets/logo.jpg" alt="Kroot Logo" loading="lazy">
             <div class="nav-actions">
-                <a id="nav-join" class="button button-primary" href="#waitlist" data-i18n="navJoin" aria-label="Join the Kroot waitlist">Join Waitlist</a>
+                <a id="nav-join" class="button button-primary" href="#" data-i18n="navJoin" aria-label="Get early access to Kroot">Get Early Access</a>
                 <button id="lang-toggle" class="button button-ghost" type="button" aria-label="Toggle language">العربية</button>
             </div>
         </nav>
@@ -342,7 +270,7 @@
                 <h1 data-i18n-html="heroTitle">Build better flashcard decks.<br>Make review feel less like a grind.</h1>
                 <p data-i18n="heroDesc">Kroot helps medical students stop wasting hours curating decks and spend that time mastering questions that actually matter.</p>
                 <div class="hero-actions">
-                    <a class="button button-primary" href="#waitlist" data-i18n="heroPrimaryCta">Get Early Access</a>
+                    <a class="button button-primary" href="#" data-i18n="heroPrimaryCta">Get Early Access</a>
                     <a class="button button-ghost" href="#features" data-i18n="heroSecondaryCta">See Why It Wins</a>
                 </div>
             </div>
@@ -371,69 +299,6 @@
             </article>
         </section>
 
-        <section id="waitlist" class="waitlist">
-            <h2 data-i18n="waitlistTitle">Join the pilot waitlist</h2>
-            <p data-i18n="waitlistDesc">Tell us where you are in training so we can tailor onboarding and initial deck templates.</p>
-
-            <form id="waitlist-form" action="https://formsubmit.co/admin@krootapp.com" method="POST">
-                <input type="hidden" name="_subject" value="New Kroot Waitlist Submission">
-                <input type="hidden" name="_captcha" value="false">
-
-                <div class="form-grid">
-                    <div class="field">
-                        <label for="full-name" data-i18n="fullNameLabel">Full Name</label>
-                        <input id="full-name" name="full_name" type="text" autocomplete="name" required>
-                    </div>
-
-                    <div class="field">
-                        <label for="email" data-i18n="emailLabel">Email</label>
-                        <input id="email" name="email" type="email" autocomplete="email" placeholder="name@school.edu" data-i18n-placeholder="emailPlaceholder" required>
-                    </div>
-
-                    <div class="field">
-                        <label for="year" data-i18n="yearLabel">Current Year</label>
-                        <select id="year" name="current_year" required>
-                            <option value="" selected disabled data-i18n="yearPrompt">Select your training year</option>
-                            <option value="Pre-med" data-i18n="yearPremed">Pre-med</option>
-                            <option value="MS1">MS1</option>
-                            <option value="MS2">MS2</option>
-                            <option value="MS3">MS3</option>
-                            <option value="MS4">MS4</option>
-                            <option value="Resident" data-i18n="yearResident">Resident</option>
-                            <option value="Other" data-i18n="yearOther">Other</option>
-                        </select>
-                    </div>
-
-                    <div class="field">
-                        <label for="school" data-i18n="schoolLabel">School</label>
-                        <input id="school" name="school" type="text" placeholder="University / Program name" data-i18n-placeholder="schoolPlaceholder" required>
-                    </div>
-
-                    <div class="field full">
-                        <label for="subject" data-i18n="subjectLabel">Main Subject You Want Kroot For</label>
-                        <select id="subject" name="subject_interest" required>
-                            <option value="" selected disabled data-i18n="subjectPrompt">Choose one</option>
-                            <option value="Anatomy" data-i18n="subjectAnatomy">Anatomy</option>
-                            <option value="Physiology" data-i18n="subjectPhysiology">Physiology</option>
-                            <option value="Pathology" data-i18n="subjectPathology">Pathology</option>
-                            <option value="Pharmacology" data-i18n="subjectPharmacology">Pharmacology</option>
-                            <option value="Microbiology" data-i18n="subjectMicrobiology">Microbiology</option>
-                            <option value="Internal Medicine" data-i18n="subjectInternalMedicine">Internal Medicine</option>
-                            <option value="Surgery" data-i18n="subjectSurgery">Surgery</option>
-                            <option value="Mixed Boards Prep" data-i18n="subjectMixedBoards">Mixed Boards Prep</option>
-                        </select>
-                    </div>
-
-                    <div class="field full">
-                        <label for="notes" data-i18n="notesLabel">Anything else we should know?</label>
-                        <textarea id="notes" name="notes" placeholder="Optional: current tools, pain points, or exams coming up." data-i18n-placeholder="notesPlaceholder"></textarea>
-                    </div>
-                </div>
-
-                <button class="button button-primary" type="submit" style="margin-top: 14px;" data-i18n="submitButton">Request Early Access</button>
-            </form>
-        </section>
-
         <footer data-i18n="footerText">&copy; 2026 Kroot. Built for students who study with intent.</footer>
     </div>
     <script>
@@ -442,7 +307,7 @@
         const translations = {
             en: {
                 pageTitle: "Kroot | Medical Study Engine",
-                navJoin: "Join Waitlist",
+                navJoin: "Get Early Access",
                 langToggle: "العربية",
                 eyebrow: "For Medical Students",
                 heroTitle: "Build better flashcard decks.<br>Make review feel less like a grind.",
@@ -460,36 +325,11 @@
                 feature2Desc: "Kroot prioritizes diagnoses, mechanisms, and management decisions that matter on exams and in rotations.",
                 feature3Title: "Review That Feels Better",
                 feature3Desc: "A smarter review loop keeps sessions moving and rewarding, so you actually want to come back tomorrow.",
-                waitlistTitle: "Join the pilot waitlist",
-                waitlistDesc: "Tell us where you are in training so we can tailor onboarding and initial deck templates.",
-                fullNameLabel: "Full Name",
-                emailLabel: "Email",
-                emailPlaceholder: "name@school.edu",
-                yearLabel: "Current Year",
-                yearPrompt: "Select your training year",
-                yearPremed: "Pre-med",
-                yearResident: "Resident",
-                yearOther: "Other",
-                schoolLabel: "School",
-                schoolPlaceholder: "University / Program name",
-                subjectLabel: "Main Subject You Want Kroot For",
-                subjectPrompt: "Choose one",
-                subjectAnatomy: "Anatomy",
-                subjectPhysiology: "Physiology",
-                subjectPathology: "Pathology",
-                subjectPharmacology: "Pharmacology",
-                subjectMicrobiology: "Microbiology",
-                subjectInternalMedicine: "Internal Medicine",
-                subjectSurgery: "Surgery",
-                subjectMixedBoards: "Mixed Boards Prep",
-                notesLabel: "Anything else we should know?",
-                notesPlaceholder: "Optional: current tools, pain points, or exams coming up.",
-                submitButton: "Request Early Access",
                 footerText: "\u00A9 2026 Kroot. Built for students who study with intent."
             },
             ar: {
                 pageTitle: "Kroot | محرك دراسة الطب",
-                navJoin: "انضم إلى قائمة الانتظار",
+                navJoin: "احصل على وصول مبكر",
                 langToggle: "English",
                 eyebrow: "لطلاب الطب",
                 heroTitle: "ابنِ بطاقات تعليمية أفضل.<br>واجعل المراجعة أقل إرهاقًا.",
@@ -507,31 +347,6 @@
                 feature2Desc: "يعطي Kroot الأولوية للتشخيصات والآليات وخيارات العلاج المهمة في الاختبارات والتدريب السريري.",
                 feature3Title: "مراجعة أفضل شعورًا",
                 feature3Desc: "حلقة مراجعة أذكى تُبقي الجلسات سلسة ومجزية لتعود إليها غدًا بكل رغبة.",
-                waitlistTitle: "انضم إلى قائمة الانتظار التجريبية",
-                waitlistDesc: "أخبرنا في أي مرحلة تدريب أنت لنخصص لك تجربة الانضمام والقوالب الأولى للبطاقات.",
-                fullNameLabel: "الاسم الكامل",
-                emailLabel: "البريد الإلكتروني",
-                emailPlaceholder: "name@school.edu",
-                yearLabel: "السنة الحالية",
-                yearPrompt: "اختر سنة التدريب",
-                yearPremed: "ما قبل الطب",
-                yearResident: "طبيب مقيم",
-                yearOther: "أخرى",
-                schoolLabel: "الجامعة",
-                schoolPlaceholder: "اسم الجامعة / البرنامج",
-                subjectLabel: "المادة الأساسية التي تريد Kroot لها",
-                subjectPrompt: "اختر واحدة",
-                subjectAnatomy: "التشريح",
-                subjectPhysiology: "علم وظائف الأعضاء",
-                subjectPathology: "علم الأمراض",
-                subjectPharmacology: "علم الأدوية",
-                subjectMicrobiology: "الأحياء الدقيقة",
-                subjectInternalMedicine: "الطب الباطني",
-                subjectSurgery: "الجراحة",
-                subjectMixedBoards: "تحضير شامل للبورد",
-                notesLabel: "هل هناك أي شيء آخر يجب أن نعرفه؟",
-                notesPlaceholder: "اختياري: الأدوات الحالية أو التحديات أو الاختبارات القادمة.",
-                submitButton: "اطلب الوصول المبكر",
                 footerText: "\u00A9 2026 Kroot. بُني للطلاب الذين يدرسون بتركيز."
             }
         };
@@ -542,7 +357,7 @@
 
         Object.assign(translations.ar, {
             pageTitle: "Kroot | محرك دراسة الطب",
-            navJoin: "انضم لقائمة الانتظار",
+            navJoin: "احصل على الوصول المبكر",
             langToggle: "English",
             eyebrow: "لطلبة الطب",
             heroTitle: "اصنع مجموعات أفضل من البطاقات،<br>لتسهيل عملية المراجعة ولجعلها أكثر متعة",
@@ -560,30 +375,6 @@
             feature2Desc: "Kroot يعطي الأولوية للتشخيص، والاجراء، وصنع القرارات المهمة في الاختبارات والتدريب السريري.",
             feature3Title: "المراجعة تمنحك الثقة في معلوماتك",
             feature3Desc: "طريقة ذكية للمراجعة والتي تجعل الجلسات أكثر فعالية وتثبيتاً للمعلومات مما يجعلك ترغب بالعودة مرة أخرى غداً.",
-            waitlistTitle: "انضم لقائمة الانتظار التجريبية",
-            waitlistDesc: "أخبرنا بالمرحلة التي وصلت إليها في التدريب، لنتمكن من إعداد قوالب أولية مخصصة تناسب مستواك الحالي.",
-            fullNameLabel: "الاسم الكامل",
-            emailLabel: "البريد الالكتروني",
-            yearLabel: "السنة الحالية",
-            yearPrompt: "اختر سنة التدريب",
-            yearPremed: "ما قبل الطب",
-            yearResident: "طبيب مقيم",
-            yearOther: "أخرى",
-            schoolLabel: "الجامعة",
-            schoolPlaceholder: "اسم الجامعة / البرنامج",
-            subjectLabel: "المادة الأساسية التي ترغب باستخدام Kroot في مذاكرتها",
-            subjectPrompt: "اختر واحداً",
-            subjectAnatomy: "التشريح",
-            subjectPhysiology: "علم وظائف الأعضاء",
-            subjectPathology: "علم الأمراض",
-            subjectPharmacology: "علم الأدوية",
-            subjectMicrobiology: "الأحياء الدقيقة",
-            subjectInternalMedicine: "الطب الباطني",
-            subjectSurgery: "الجراحة",
-            subjectMixedBoards: "التحضير للزمالة",
-            notesLabel: "معلومات أخرى ترغب بإضافاتها",
-            notesPlaceholder: "معلومات أخرى ترغب بإضافاتها",
-            submitButton: "اطلب الوصول المبكر",
             footerText: "Kroot صُنع من أجل الطلبة الذين يدرسون بشغف"
         });
 
