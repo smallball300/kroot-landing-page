@@ -213,6 +213,151 @@
             color: var(--muted);
         }
 
+        .beta-recruitment {
+            background: var(--white);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            padding: clamp(22px, 4vw, 36px);
+            margin-bottom: 34px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .beta-recruitment::before {
+            content: "";
+            position: absolute;
+            inset: 0 0 auto 0;
+            height: 6px;
+            background: linear-gradient(90deg, var(--teal-700) 0%, var(--teal-400) 100%);
+        }
+
+        .beta-recruitment .beta-eyebrow {
+            display: inline-block;
+            background: rgba(13, 127, 133, 0.1);
+            color: var(--teal-700);
+            font: 700 0.75rem/1 "Space Grotesk", sans-serif;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            padding: 6px 12px;
+            border-radius: 999px;
+            margin-bottom: 14px;
+        }
+
+        .beta-recruitment h2 {
+            font-size: clamp(1.55rem, 3.2vw, 2.1rem);
+            margin: 0 0 8px;
+            color: var(--ink);
+        }
+
+        .beta-recruitment .beta-lede {
+            margin: 0 0 22px;
+            color: var(--muted);
+            max-width: 60ch;
+        }
+
+        .beta-steps {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 14px;
+            margin-bottom: 22px;
+        }
+
+        .beta-step {
+            background: var(--card);
+            border: 1px solid rgba(160, 199, 204, 0.6);
+            border-radius: 14px;
+            padding: 16px;
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+
+        .beta-step .step-num {
+            background: var(--teal-600);
+            color: var(--white);
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font: 700 0.95rem/1 "Space Grotesk", sans-serif;
+            flex-shrink: 0;
+        }
+
+        .beta-step h3 {
+            margin: 0 0 4px;
+            font-size: 1rem;
+        }
+
+        .beta-step p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 0.92rem;
+        }
+
+        .beta-perks {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 12px;
+            margin-bottom: 22px;
+        }
+
+        .beta-perk {
+            background: var(--card);
+            border: 1px solid rgba(160, 199, 204, 0.6);
+            border-radius: 14px;
+            padding: 14px;
+        }
+
+        .beta-perk h4 {
+            margin: 0 0 4px;
+            font-size: 0.95rem;
+            color: var(--teal-700);
+        }
+
+        .beta-perk p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 0.88rem;
+        }
+
+        .beta-cta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            align-items: center;
+            justify-content: space-between;
+            background: linear-gradient(130deg, var(--teal-700) 0%, var(--teal-600) 100%);
+            color: var(--white);
+            border-radius: 14px;
+            padding: 18px 22px;
+        }
+
+        .beta-cta .beta-cta-text {
+            margin: 0;
+            font: 600 1rem/1.4 "Manrope", sans-serif;
+        }
+
+        .beta-cta .beta-cta-text span {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 400;
+            color: #d8eff1;
+            margin-top: 2px;
+        }
+
+        .beta-cta .button {
+            background: var(--white);
+            color: var(--teal-700);
+        }
+
+        .beta-cta .button:hover,
+        .beta-cta .button:focus {
+            background: #f0fafb;
+        }
+
         .waitlist {
             background: linear-gradient(130deg, #0b6266 0%, #04474f 100%);
             color: var(--white);
@@ -278,7 +423,8 @@
             font-family: "Cairo", "Manrope", sans-serif;
         }
 
-        html[dir="rtl"] .eyebrow {
+        html[dir="rtl"] .eyebrow,
+        html[dir="rtl"] .beta-recruitment .beta-eyebrow {
             letter-spacing: 0;
             text-transform: none;
         }
@@ -317,11 +463,28 @@
             .features {
                 grid-template-columns: 1fr;
             }
+
+            .beta-steps {
+                grid-template-columns: 1fr;
+            }
+
+            .beta-perks {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
         }
 
         @media (max-width: 700px) {
             .form-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .beta-perks {
+                grid-template-columns: 1fr;
+            }
+
+            .beta-cta {
+                flex-direction: column;
+                align-items: flex-start;
             }
         }
     </style>
@@ -369,6 +532,63 @@
                 <h3 data-i18n="feature3Title">Review That Feels Better</h3>
                 <p data-i18n="feature3Desc">A smarter review loop keeps sessions moving and rewarding, so you actually want to come back tomorrow.</p>
             </article>
+        </section>
+
+        <section id="beta" class="beta-recruitment" aria-labelledby="beta-heading">
+            <span class="beta-eyebrow" data-i18n="betaEyebrow">Closed beta</span>
+            <h2 id="beta-heading" data-i18n="betaTitle">10 spots open for second-year medical students in Saudi Arabia</h2>
+            <p class="beta-lede" data-i18n="betaLede">A one-month closed beta. Help shape Kroot before public launch and get free early access for your effort.</p>
+
+            <div class="beta-steps">
+                <div class="beta-step">
+                    <span class="step-num" aria-hidden="true">1</span>
+                    <div>
+                        <h3 data-i18n="betaStep1Title">Sign up</h3>
+                        <p data-i18n="betaStep1Desc">First come, first served. Signups close May 26, 2026.</p>
+                    </div>
+                </div>
+                <div class="beta-step">
+                    <span class="step-num" aria-hidden="true">2</span>
+                    <div>
+                        <h3 data-i18n="betaStep2Title">Use Kroot for a month</h3>
+                        <p data-i18n="betaStep2Desc">Work through the decks at your own pace and build a few of your own questions.</p>
+                    </div>
+                </div>
+                <div class="beta-step">
+                    <span class="step-num" aria-hidden="true">3</span>
+                    <div>
+                        <h3 data-i18n="betaStep3Title">Share feedback</h3>
+                        <p data-i18n="betaStep3Desc">Fill out a short survey at the end. Your input decides what we fix and build before launch.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="beta-perks">
+                <div class="beta-perk">
+                    <h4 data-i18n="betaPerk1Title">Free early access</h4>
+                    <p data-i18n="betaPerk1Desc">Use Kroot before public launch.</p>
+                </div>
+                <div class="beta-perk">
+                    <h4 data-i18n="betaPerk2Title">Expert-reviewed decks</h4>
+                    <p data-i18n="betaPerk2Desc">Pre-loaded content reviewed by medical subject matter experts.</p>
+                </div>
+                <div class="beta-perk">
+                    <h4 data-i18n="betaPerk3Title">Build your own cards</h4>
+                    <p data-i18n="betaPerk3Desc">Author questions inside the app to fit your study plan.</p>
+                </div>
+                <div class="beta-perk">
+                    <h4 data-i18n="betaPerk4Title">Direct line to the team</h4>
+                    <p data-i18n="betaPerk4Desc">Reach the builders if something breaks or you have ideas.</p>
+                </div>
+            </div>
+
+            <div class="beta-cta">
+                <p class="beta-cta-text">
+                    <span data-i18n="betaCtaSpan">Open to second-year medical students currently studying in Saudi Arabia.</span>
+                    <strong data-i18n="betaCtaStrong">Sign up by May 26, 2026.</strong>
+                </p>
+                <a id="beta-signup" class="button button-primary" href="#waitlist" data-i18n="betaCtaButton">Apply for the beta</a>
+            </div>
         </section>
 
         <section id="waitlist" class="waitlist">
@@ -537,7 +757,27 @@
         };
 
         Object.assign(translations.en, {
-            langToggle: "العربية"
+            langToggle: "العربية",
+            betaEyebrow: "Closed beta",
+            betaTitle: "10 spots open for second-year medical students in Saudi Arabia",
+            betaLede: "A one-month closed beta. Help shape Kroot before public launch and get free early access for your effort.",
+            betaStep1Title: "Sign up",
+            betaStep1Desc: "First come, first served. Signups close May 26, 2026.",
+            betaStep2Title: "Use Kroot for a month",
+            betaStep2Desc: "Work through the decks at your own pace and build a few of your own questions.",
+            betaStep3Title: "Share feedback",
+            betaStep3Desc: "Fill out a short survey at the end. Your input decides what we fix and build before launch.",
+            betaPerk1Title: "Free early access",
+            betaPerk1Desc: "Use Kroot before public launch.",
+            betaPerk2Title: "Expert-reviewed decks",
+            betaPerk2Desc: "Pre-loaded content reviewed by medical subject matter experts.",
+            betaPerk3Title: "Build your own cards",
+            betaPerk3Desc: "Author questions inside the app to fit your study plan.",
+            betaPerk4Title: "Direct line to the team",
+            betaPerk4Desc: "Reach the builders if something breaks or you have ideas.",
+            betaCtaSpan: "Open to second-year medical students currently studying in Saudi Arabia.",
+            betaCtaStrong: "Sign up by May 26, 2026.",
+            betaCtaButton: "Apply for the beta"
         });
 
         Object.assign(translations.ar, {
@@ -584,7 +824,27 @@
             notesLabel: "معلومات أخرى ترغب بإضافاتها",
             notesPlaceholder: "معلومات أخرى ترغب بإضافاتها",
             submitButton: "اطلب الوصول المبكر",
-            footerText: "Kroot صُنع من أجل الطلبة الذين يدرسون بشغف"
+            footerText: "Kroot صُنع من أجل الطلبة الذين يدرسون بشغف",
+            betaEyebrow: "النسخة التجريبية المغلقة",
+            betaTitle: "10 مقاعد متاحة لطلاب السنة الثانية في كليات الطب بالمملكة العربية السعودية",
+            betaLede: "نسخة تجريبية مغلقة لمدة شهر. ساعدنا في تطوير Kroot قبل الإطلاق العام واحصل على وصول مبكر مجاني مقابل ذلك.",
+            betaStep1Title: "سجّل اشتراكك",
+            betaStep1Desc: "الأولوية لمن يسبق. آخر موعد للتسجيل 26 مايو 2026.",
+            betaStep2Title: "استخدم Kroot لمدة شهر",
+            betaStep2Desc: "ادرس البطاقات على إيقاعك الخاص وأنشئ بعض أسئلتك.",
+            betaStep3Title: "شارك ملاحظاتك",
+            betaStep3Desc: "املأ استبيانًا قصيرًا في النهاية. ملاحظاتك تحدد ما سنصلحه ونبنيه قبل الإطلاق.",
+            betaPerk1Title: "وصول مبكر مجاني",
+            betaPerk1Desc: "استخدم Kroot قبل الإطلاق العام.",
+            betaPerk2Title: "بطاقات راجعها الخبراء",
+            betaPerk2Desc: "محتوى جاهز راجعه أخصائيون في الطب.",
+            betaPerk3Title: "أنشئ بطاقاتك الخاصة",
+            betaPerk3Desc: "اكتب أسئلتك داخل التطبيق بما يناسب خطتك الدراسية.",
+            betaPerk4Title: "تواصل مباشر مع الفريق",
+            betaPerk4Desc: "تواصل مع المطورين إذا حدث خلل أو لديك أفكار.",
+            betaCtaSpan: "متاح لطلاب السنة الثانية في كليات الطب بالمملكة العربية السعودية.",
+            betaCtaStrong: "سجّل قبل 26 مايو 2026.",
+            betaCtaButton: "قدّم للنسخة التجريبية"
         });
 
         function setLanguage(lang) {
